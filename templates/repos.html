@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block main %}
+{% set name = 'Repositories' -%}
+{% set records = repos|length -%}
+{% include 'filter_bar.html' %}
+<div class="table-container">
+    <table class="table bordered">
+        <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+    </tr>
+        </thead>
+        <tbody>
+    {% for p in repos %}
+    <tr>
+        <td>{{p["name"]}}</td>
+        <td>{{p["type"]}}</td>
+    </tr>
+    {% endfor %}
+        </tbody>
+</table>
+</div>
+{% endblock %}

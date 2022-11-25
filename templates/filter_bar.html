@@ -1,0 +1,21 @@
+<div class="card" style="width: calc(100% - 30px); margin-left: 15px;">
+    <div class="content">
+        <h4>{{name}}</h4>
+        <form id="filter-form">
+            <div class="form-group">
+                <label class="form-group-label">Type:</label>
+                <select class="form-group-input w-100p" placeholder="Choose one" name="type">
+                    {% for row in type_choices %}
+                    <option value="{{ row }}"{% if row == type %} selected{% endif %}>{{ row }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <input type="hidden" name="page" value="{{page}}" id="page">
+            <div class="form-group">
+                <input type="search" class="form-group-input" placeholder="Search" name="search" value="{{search}}"/>
+                <button type="submit" class="form-group-btn">Search</button>
+            </div>
+        </form>
+        <p><b>Results: </b>{{records}}</p>
+    </div>
+</div>

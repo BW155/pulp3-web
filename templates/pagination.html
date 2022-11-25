@@ -1,0 +1,16 @@
+<div style="height:100px"></div>
+<div class="card" style="width: calc(100% - 30px); margin-left: 15px; position: fixed; bottom: 0">
+    <div class="content u-center">
+        <div class="form-group">
+            <button class="btn btn-info" {% if page > 0 %} onclick="page(-1)" {% else %} disabled="disabled" {% endif %}>Prev</button>
+            <button class="btn btn-info" {% if nextPage %} onclick="page(+1)" {% else %} disabled="disabled" {% endif %}>Next</button>
+        </div>
+    </div>
+    <script>
+        function page(num) {
+            let p = $("#page");
+            p.val(parseInt(p.val()) + num);
+            $("#filter-form").submit();
+        }
+    </script>
+</div>

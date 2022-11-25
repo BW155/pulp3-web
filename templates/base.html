@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pulp3 Web</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cirrus-ui/dist/cirrus.min.css">
+</head>
+<body>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+
+<div class="grid u-gap-2 u-text-center" style="min-height: 100%;">
+    <div class="grid-c-12" style="min-height: 52px">
+        <div class="header header-fixed u-unselectable header-animated">
+            <div class="header-brand">
+                <div class="nav-item no-hover">
+                    <a><h6 class="title">Pulp3-Web</h6></a>
+                </div>
+                <div class="nav-item">
+                    <a href="#">
+                <span class="icon">
+                    <i class="fab fa-wrapper fa-github"></i>
+                </span>
+                    </a>
+                </div>
+                <div class="nav-item nav-btn" id="header-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <div class="header-nav" id="header-menu">
+                <!-- Other nav categories, controls, nav-items, etc. This is hidden on touch enabled devices -->
+                <div class="nav-item has-sub toggle-hover" id="dropdown">
+                    <a class="nav-dropdown-link">Categories</a>
+                    <ul class="dropdown-menu dropdown-animated" role="menu" id="dropdown-menu">
+                        <li role="menu-item"><a href="/remotes">Remotes</a></li>
+                        <li role="menu-item"><a href="/content">Content</a></li>
+                        <li role="menu-item"><a href="/repos">Repositories</a></li>
+                        <li role="menu-item"><a href="/distributions">Distributions</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--<div class="grid-c-3 grid-r-12" style="box-shadow: black 2px 2px; border-radius: .25rem; width: 200px">
+        <p><b>Sidebar</b></p>
+    </div>-->
+    <div class="grid-c-12 grid-r-12">
+        {% block main %}
+        {% endblock %}
+    </div>
+    <!--<div class="grid-c-12" style="background: linear-gradient(to right, #8e2de2, #4a00e0); color: #fff; border-radius: .25rem;">
+        <p><b>Footer</b></p>
+    </div>-->
+</div>
+
+<script>
+    // Get all the nav-btns in the page
+    let navBtns = document.querySelectorAll('.nav-btn');
+
+    // Add an event handler for all nav-btns to enable the dropdown functionality
+    navBtns.forEach(function (ele) {
+        ele.addEventListener('click', function() {
+            // Get the dropdown-menu associated with this nav button (insert the id of your menu)
+            let dropDownMenu = document.getElementById('dropdown');
+
+            // Toggle the nav-btn and the dropdown menu
+            ele.classList.toggle('active');
+            dropDownMenu.classList.toggle('active');
+        });
+    });
+
+
+    let navBtns = document.querySelectorAll('.dropdown-action-menu');
+
+    navBtns.forEach(function (ele) {
+        ele.addEventListener('click', function() {
+            // Get the dropdown-menu associated with this nav button (insert the id of your menu)
+            let dropDownMenu = document.getElementById('dropdown');
+
+            // Toggle the nav-btn and the dropdown menu
+            ele.classList.toggle('active');
+            dropDownMenu.classList.toggle('active');
+        });
+    });
+
+    $('#header-btn').on('click', function(e) {
+        $('#dropdown').toggleClass('active');
+        $('.nav-btn').toggleClass('active');
+    });
+</script>
+</body>
+</html>

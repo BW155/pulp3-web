@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block main %}
+{% set name = 'Content' -%}
+{% set records = packages|length -%}
+{% include 'filter_bar.html' %}
+<style>
+    nav ul {
+        list-style:none;
+        display:inline-block;
+    }
+    nav ul li ul {
+        display:none;
+    }
+    .visible {
+        display:block;
+    }
+    .menu-button {
+        margin-bottom: 0 !important;
+    }
+    .menu-button:before {
+        display: inline-block;
+        width: 50px;
+    }
+
+    .menu-button:after {
+        display: inline-block;
+        width: 50px;
+    }
+    .sub-nav {
+        position: absolute;
+
+    }
+    .menu {
+        width: 200px;
+    }
+    .sub-nav > li > button {
+        margin-bottom: 0 !important;
+    }
+    .sub-nav > li {
+    }
+</style>
+<div class="table-container">
+    <table class="table bordered">
+        <thead>
+    <tr>
+        <th>Name</th>
+        <th>Version</th>
+        <th>Kind</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for p in packages %}
+    <tr>
+        <td>{{p["name"]}}</td>
+        <td>{{p["version"]}}</td>
+        <td>{{p["type"]}}</td>
+
+        <td>
+            <div class="header-nav">
+                <nav>
+                    <ul class="menu">
+                        <li><a href="#" class="menu-button btn btn-info btn--xs">Actions</a>
+                            <ul class='sub-nav'>
+                                <li>
+                                    {% if p["type"] == "RPM" %}
+                                    <button class="btn--sm btn-primary" onclick="navigator.clipboard.writeText('/pulp/api/v3/content/rpm/packages/{{p["id"]}}/')">Copy Pulp HREF</button>
+                                    {% elif p["type"] == "DEB"%}
+                                    <button class="btn--sm btn-primary" onclick="navigator.clipboard.writeText('/pulp/api/v3/content/deb/packages/{{p["id"]}}/')">Copy Pulp HREF</button>
+                                    {% endif %}
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</div>
+<script>
+    $(document).ready(function () {
+        $('.menu').click(function (el) {
+            setTimeout(function() {
+                console.log(el.currentTarget);
+                $(el.currentTarget).find('.sub-nav').toggleClass('visible');
+            }, 5);
+        });
+        $('body').click(function() {
+
+            $('.sub-nav').removeClass('visible');
+        })
+    });
+</script>
+{% include 'pagination.html' %}
+{% endblock %}

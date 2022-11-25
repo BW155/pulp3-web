@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block main %}
+{% set name = 'Remotes' -%}
+{% set records = remotes|length -%}
+{% include 'filter_bar.html' %}
+<div class="table-container">
+    <table class="table bordered">
+        <thead>
+    <tr>
+        <th>Name</th>
+        <th>Policy</th>
+        <th>Url</th>
+        <th>Type</th>
+    </tr>
+        </thead>
+        <tbody>
+    {% for p in remotes %}
+    <tr>
+        <td>{{p["name"]}}</td>
+        <td>{{p["policy"]}}</td>
+        <td>{{p["url"]}}</td>
+        <td>{{p["type"]}}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endblock %}
